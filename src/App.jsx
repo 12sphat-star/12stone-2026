@@ -76,6 +76,7 @@ function App() {
   ]
 
   const [activeIndustry, setActiveIndustry] = useState('home')
+  const [showroomPreviewOpen, setShowroomPreviewOpen] = useState(false)
 
   const currentIndustry =
     industries.find((industry) => industry.id === activeIndustry) ||
@@ -220,6 +221,30 @@ useEffect(() => {
 
   return () => observer.disconnect()
 }, [])
+
+/* =========================================
+   AI PHONE EMPLOYEE — INTERACTIVE DEMO
+========================================= */
+
+const [aiCallStep, setAiCallStep] = useState(0)
+
+useEffect(() => {
+  if (aiCallStep === 0 || aiCallStep >= 4) return
+
+  const timer = setTimeout(() => {
+    setAiCallStep((step) => step + 1)
+  }, 2200)
+
+  return () => clearTimeout(timer)
+}, [aiCallStep])
+
+const startAiCallDemo = () => {
+  setAiCallStep(1)
+}
+
+const replayAiCallDemo = () => {
+  setAiCallStep(0)
+}
     return (
     <main className="site">
 
@@ -347,7 +372,9 @@ useEffect(() => {
                   <span>Reviews</span>
                 </div>
 
-                <button type="button">Book Service</button>
+                <button type="button" disabled aria-label="Demo preview only">
+                  Book Service
+                </button>
               </div>
 
 
@@ -374,7 +401,7 @@ useEffect(() => {
   </div>
 </div>
 
-                  <button type="button">
+                 <button type="button">
                     Schedule Service
                   </button>
                 </div>
@@ -414,7 +441,7 @@ useEffect(() => {
                   when you are.
                 </strong>
 
-                <button type="button">
+                <button type="button" disabled aria-label="Demo preview only">
                   Schedule
                 </button>
               </div>
@@ -548,7 +575,7 @@ useEffect(() => {
               STARTS HERE.
             </strong>
 
-            <button type="button">
+            <button type="button" disabled aria-label="Demo preview only">
               Schedule Service
             </button>
 
@@ -789,15 +816,29 @@ useEffect(() => {
       <div className="ai-call-window">
 
         <div className="ai-call-header">
+  <div className="ai-call-header">
+  <div className="ai-call-live">
+    <span />
+    {aiCallStep === 0
+      ? 'INCOMING CALL — DEMO'
+      : aiCallStep === 4
+        ? 'CALL COMPLETED — DEMO'
+        : 'SIMULATED CUSTOMER CALL'}
+  </div>
 
-          <div className="ai-call-live">
-            <span />
-            LIVE CUSTOMER CALL
-          </div>
+  <small>
+    {aiCallStep === 0
+      ? '00:00'
+      : `00:${String(Math.min(aiCallStep * 12, 48)).padStart(2, '0')}`}
+  </small>
+</div>
 
-          <small>00:47</small>
-
-        </div>
+  <small>
+    {aiCallStep === 0
+      ? '00:00'
+      : `00:${String(Math.min(aiCallStep * 12, 48)).padStart(2, '0')}`}
+  </small>
+</div>
 
 
         <div className="ai-caller">
@@ -830,34 +871,41 @@ useEffect(() => {
         </div>
 
 
-        <div className="ai-call-conversation">
+      <div className="ai-call-conversation">
 
-          <div className="ai-transcript customer">
+  {aiCallStep === 0 && (
+    <div className="ai-demo-waiting">
+      <strong>Incoming Customer Call</strong>
+      <p>
+        Answer to experience how your AI Phone Employee responds.
+      </p>
+    </div>
+  )}
 
-            <span>CUSTOMER</span>
+  {aiCallStep >= 1 && (
+    <div className="ai-transcript customer">
+      <span>CUSTOMER</span>
+      <p>“My AC stopped cooling this afternoon.”</p>
+    </div>
+  )}
 
-            <p>
-              “My AC stopped cooling this afternoon.”
-            </p>
+  {aiCallStep >= 2 && (
+    <div className="ai-transcript employee">
+      <span>RIVERSIDE AI PHONE EMPLOYEE</span>
+      <p>
+        “I can help with that. Let me get a few details
+        and check the next available service time.”
+      </p>
+    </div>
+  )}
 
-          </div>
+</div>
 
-
-          <div className="ai-transcript employee">
-
-            <span>RIVERSIDE AI PHONE EMPLOYEE</span>
-
-            <p>
-              “I can help with that. Let me get a few
-              details and check the next available service time.”
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div className="ai-call-capture">
+   <div
+  className={`ai-call-capture ${
+    aiCallStep >= 3 ? 'ai-capture-visible' : 'ai-capture-hidden'
+  }`}
+>
 
           <div>
             <small>NEED IDENTIFIED</small>
@@ -878,7 +926,36 @@ useEffect(() => {
 
 
         <div className="ai-call-status">
+<div className="ai-demo-controls">
 
+  {aiCallStep === 0 && (
+    <button
+      type="button"
+      className="ai-demo-answer"
+      onClick={startAiCallDemo}
+    >
+      <span>☎</span>
+      Answer Call
+    </button>
+  )}
+
+  {aiCallStep > 0 && aiCallStep < 4 && (
+    <span className="ai-demo-progress">
+      AI Phone Employee Demonstration in Progress...
+    </span>
+  )}
+
+  {aiCallStep === 4 && (
+    <button
+      type="button"
+      className="ai-demo-replay"
+      onClick={replayAiCallDemo}
+    >
+      ↻ Replay Demonstration
+    </button>
+  )}
+
+</div>
           <span>
             <i />
             Conversation in progress
@@ -895,7 +972,32 @@ useEffect(() => {
     </div>
 
   </div>
+{/* SMART WEBSITE CONVERSION CTA */}
 
+<div className="smart-system-cta">
+  <p className="eyebrow">
+    YOUR BUSINESS COULD WORK THIS WAY TOO
+  </p>
+
+  <h3>
+    READY TO TURN YOUR WEBSITE
+    <span> INTO A BUSINESS GROWTH SYSTEM?</span>
+  </h3>
+
+  <p>
+    Let's explore what a smarter website, connected customer
+    experience, and AI-powered communication could look like
+    for your business.
+  </p>
+
+  <a
+    href="#start-discovery"
+    className="button button-primary"
+  >
+    Show Me What's Possible For My Business
+    <span>→</span>
+  </a>
+</div>
 </section>
 {/* =====================================================
     INDUSTRY SHOWROOM
@@ -1080,13 +1182,23 @@ useEffect(() => {
       <div className="showroom-browser-menu">•••</div>
     </div>
 
-    <div className="showroom-image-wrap">
-      <img
-        className="showroom-image"
-        src={showroomImage(displayIndustry)}
-        alt={`${industries.find((i) => i.id === displayIndustry)?.name} Smart Website concept`}
-      />
-    </div>
+    <button
+  type="button"
+  className="showroom-image-wrap showroom-preview-trigger"
+  onClick={() => setShowroomPreviewOpen(true)}
+  aria-label={`View larger ${currentIndustry.name} website concept`}
+>
+  <img
+    className="showroom-image"
+    src={showroomImage(displayIndustry)}
+    alt={`${currentIndustry.name} Smart Website concept`}
+  />
+
+  <span className="showroom-preview-label">
+    <span>VIEW FULL DESIGN</span>
+    <span>↗</span>
+  </span>
+</button>
   </div>
 </div>
 
@@ -1121,6 +1233,32 @@ useEffect(() => {
 
   </div>
 
+{/* INDUSTRY SHOWROOM CTA */}
+
+<div className="showroom-conversion">
+  <div className="showroom-conversion-copy">
+    <span>IMAGINE WHAT WE COULD BUILD FOR YOU</span>
+
+    <h3>
+      YOUR BUSINESS.
+      <strong> YOUR OWN EXPERIENCE.</strong>
+    </h3>
+
+    <p>
+      Inspired by our {currentIndustry.name.toLowerCase()} concept?
+      Let's explore a Smart Website System designed around
+      your business, your customers, and your goals.
+    </p>
+  </div>
+
+  <a
+    href="#start-discovery"
+    className="button button-primary"
+  >
+    Build Something Like This For My Business
+    <span>→</span>
+  </a>
+</div>
 
   {/* =====================================================
       PHILOSOPHY
@@ -1199,6 +1337,56 @@ useEffect(() => {
 
   </div>
 
+{showroomPreviewOpen && (
+  <div
+    className="showroom-preview-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label={`${currentIndustry.name} website design preview`}
+    onClick={() => setShowroomPreviewOpen(false)}
+  >
+    <div
+      className="showroom-preview-panel"
+      onClick={(event) => event.stopPropagation()}
+    >
+      <div className="showroom-preview-header">
+        <div>
+          <span>12 STONE SMART WEBSITE™ CONCEPT</span>
+          <strong>{currentIndustry.name}</strong>
+        </div>
+
+        <button
+          type="button"
+          className="showroom-preview-close"
+          onClick={() => setShowroomPreviewOpen(false)}
+          aria-label="Close preview"
+        >
+          ×
+        </button>
+      </div>
+
+      <div className="showroom-preview-content">
+        <img
+          src={showroomImage(displayIndustry)}
+          alt={`${currentIndustry.name} website design`}
+        />
+      </div>
+
+      <div className="showroom-preview-footer">
+        <span>IMAGINE THIS EXPERIENCE FOR YOUR BUSINESS.</span>
+
+        <a
+          href="#start-discovery"
+          className="button button-primary"
+          onClick={() => setShowroomPreviewOpen(false)}
+        >
+          Build My Smart Website
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+)}
 </section>
 
 {/* =====================================================

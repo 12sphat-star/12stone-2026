@@ -5463,14 +5463,16 @@
    ORBIT
    ========================================================= */
 
+
 .method-orbit {
   position: relative;
-
   width: min(680px, 64vw);
   aspect-ratio: 1 / 1;
-
   margin: 0 auto 75px;
+
+  --orbit-radius: calc(min(680px, 64vw) * 0.35);
 }
+
 
 .method-orbit-ring {
   position: absolute;
@@ -5646,44 +5648,43 @@ height: 205px;
 }
 
 
-/* =========================================================
-   MOVING CONNECTION
-   ========================================================= */
 
+/* PURPLE DOT — FOLLOW THE OUTER ORBIT */
 .method-orbit-dot {
   position: absolute;
   z-index: 5;
 
-  top: 14.3%;
+  top: 50%;
   left: 50%;
 
   width: 13px;
   height: 13px;
-
-  margin-left: -6px;
+  margin: -6.5px 0 0 -6.5px;
 
   border-radius: 50%;
-
   background: #7443dc;
 
   box-shadow:
-    0 0 0 7px rgba(116, 67, 220, .09),
-    0 0 22px rgba(116, 67, 220, .30);
-
-  transform-origin: 6px 243px;
+    0 0 0 7px rgba(116, 67, 220, 0.09),
+    0 0 22px rgba(116, 67, 220, 0.30);
 
   animation: methodOrbit 13s linear infinite;
 }
 
 @keyframes methodOrbit {
   from {
-    transform: rotate(0deg);
+    transform: rotate(0deg)
+      translateY(calc(-1 * var(--orbit-radius)))
+      rotate(0deg);
   }
 
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg)
+      translateY(calc(-1 * var(--orbit-radius)))
+      rotate(-360deg);
   }
 }
+
 
 
 /* =========================================================
@@ -5954,9 +5955,12 @@ height: 205px;
 
 @media (max-width: 1100px) {
 
-  .method-orbit {
-    width: min(780px, 90vw);
-  }
+ 
+.method-orbit {
+  width: min(780px, 90vw);
+  --orbit-radius: calc(min(780px, 90vw) * 0.35);
+}
+
 
   .discover-panel-heading {
     grid-template-columns: 1fr 1fr;
@@ -10753,7 +10757,9 @@ height: 205px;
 
 /* PURPLE ORBIT SIGNAL */
 .method-section.method-active .method-orbit-dot {
-  animation: methodSignalGlow 2s ease-in-out infinite;
+  animation:
+    methodOrbit 13s linear infinite,
+    methodSignalGlow 2s ease-in-out infinite;
 }
 
 @keyframes methodSignalGlow {
@@ -10957,4 +10963,228 @@ height: 205px;
   .executive-section.executive-active .executive-capability {
     animation: none;
   }
+}
+
+/* SMART WEBSITE CONVERSION CTA */
+
+.smart-system-cta {
+  max-width: 900px;
+  margin: 90px auto 20px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.smart-system-cta .eyebrow {
+  color: #7443dc;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.smart-system-cta h3 {
+  margin: 20px 0;
+  font-size: clamp(30px, 3.4vw, 48px);
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.smart-system-cta h3 span {
+  color: #7443dc;
+}
+
+.smart-system-cta > p:not(.eyebrow) {
+  max-width: 650px;
+  margin: 0 auto 30px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #64748b;
+}
+
+.smart-system-cta .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  max-width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .smart-system-cta {
+    margin-top: 50px;
+    padding: 35px 18px;
+  }
+
+  .smart-system-cta .button {
+    font-size: 13px;
+    white-space: normal;
+  }
+}
+
+/* INDUSTRY SHOWROOM CONVERSION */
+
+.showroom-conversion {
+  max-width: 1160px;
+  margin: 48px auto 90px;
+  padding: 38px 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  border: 1px solid rgba(116, 67, 220, 0.14);
+  border-radius: 22px;
+  background: linear-gradient(
+    120deg,
+    #ffffff 0%,
+    #faf7ff 100%
+  );
+  box-shadow: 0 20px 55px rgba(36, 22, 68, 0.05);
+}
+
+.showroom-conversion-copy {
+  max-width: 570px;
+}
+
+.showroom-conversion-copy > span {
+  display: block;
+  margin-bottom: 12px;
+  color: #7443dc;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.showroom-conversion h3 {
+  margin: 0 0 12px;
+  font-size: clamp(23px, 2.4vw, 34px);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.showroom-conversion h3 strong {
+  color: #7443dc;
+}
+
+.showroom-conversion p {
+  margin: 0;
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.showroom-conversion .button {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 850px) {
+  .showroom-conversion {
+    margin: 35px 20px 65px;
+    padding: 30px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .showroom-conversion .button {
+    width: 100%;
+    white-space: normal;
+  }
+}
+/* AI PHONE EMPLOYEE INTERACTIVE DEMO */
+
+.ai-demo-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 16px 26px;
+}
+
+.ai-demo-answer,
+.ai-demo-replay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 15px 28px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: #7443dc;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ai-demo-answer:hover,
+.ai-demo-replay:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(116, 67, 220, 0.25);
+}
+
+.ai-demo-answer span {
+  font-size: 20px;
+}
+
+.ai-demo-progress {
+  color: #7443dc;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.ai-demo-waiting {
+  padding: 25px 18px;
+  text-align: center;
+}
+
+.ai-demo-waiting strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #22183b;
+  font-size: 16px;
+}
+
+.ai-demo-waiting p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.ai-capture-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.ai-capture-visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-demo-answer,
+  .ai-demo-replay,
+  .ai-capture-visible {
+    transition: none;
+  }
+}
+/* AI CUSTOMER CAPTURE REVEAL */
+
+.ai-capture-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.ai-capture-visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease;
 }
