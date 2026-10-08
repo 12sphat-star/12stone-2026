@@ -2469,12 +2469,13 @@ useEffect(() => {
       </div>
 
 
-   <form
+  <form
   className="start-form"
   name="12-Stone-Discovery"
-  method="POST"
   onSubmit={(e) => {
-    console.log("12 STONE form submitted")
+    e.preventDefault();
+    console.log("12 STONE form submitted");
+    window.alert("Test submission completed. Check GHL for the contact.");
   }}
 >
 
