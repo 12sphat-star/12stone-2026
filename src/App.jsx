@@ -2472,11 +2472,53 @@ useEffect(() => {
   <form
   className="start-form"
   name="12-Stone-Discovery"
-  onSubmit={(e) => {
-    e.preventDefault();
-    console.log("12 STONE form submitted");
-    window.alert("Test submission completed. Check GHL for the contact.");
-  }}
+ 
+onSubmit={async (e) => {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+  const submitButton = form.querySelector('button[type="submit"]');
+  const formData = new FormData(form);
+
+  const lead = {
+    name: formData.get("name"),
+    business: formData.get("business"),
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+  };
+
+  submitButton.disabled = true;
+
+  try {
+    const response = await fetch("/api/discovery", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(lead),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.error || "Submission failed.");
+    }
+
+    window.alert(
+      "Thank you! Your information has been received. We'll be in touch soon."
+    );
+
+    form.reset();
+  } catch (error) {
+    console.error("12 STONE submission error:", error);
+    window.alert(
+      "We couldn't submit your information. Please try again."
+    );
+  } finally {
+    submitButton.disabled = false;
+  }
+}}
+
 >
 
         <div className="start-field">
