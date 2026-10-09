@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
 
+
 function App() {
     const industries = [
     {
@@ -222,29 +223,7 @@ useEffect(() => {
   return () => observer.disconnect()
 }, [])
 
-/* =========================================
-   AI PHONE EMPLOYEE — INTERACTIVE DEMO
-========================================= */
 
-const [aiCallStep, setAiCallStep] = useState(0)
-
-useEffect(() => {
-  if (aiCallStep === 0 || aiCallStep >= 4) return
-
-  const timer = setTimeout(() => {
-    setAiCallStep((step) => step + 1)
-  }, 2200)
-
-  return () => clearTimeout(timer)
-}, [aiCallStep])
-
-const startAiCallDemo = () => {
-  setAiCallStep(1)
-}
-
-const replayAiCallDemo = () => {
-  setAiCallStep(0)
-}
     return (
     <main className="site">
 
@@ -807,171 +786,68 @@ const replayAiCallDemo = () => {
     </div>
 
 
-    {/* LIVE CALL EXPERIENCE */}
+   
+{/* ASHLEY — REAL AI VOICE EMPLOYEE */}
 
-    <div className="ai-call-stage">
+<div className="ai-call-stage">
+  <div className="ai-call-glow" />
 
-      <div className="ai-call-glow" />
+  <div className="ai-call-window">
 
-      <div className="ai-call-window">
-
-        <div className="ai-call-header">
-  <div className="ai-call-header">
-  <div className="ai-call-live">
-    <span />
-    {aiCallStep === 0
-      ? 'INCOMING CALL — DEMO'
-      : aiCallStep === 4
-        ? 'CALL COMPLETED — DEMO'
-        : 'SIMULATED CUSTOMER CALL'}
-  </div>
-
-  <small>
-    {aiCallStep === 0
-      ? '00:00'
-      : `00:${String(Math.min(aiCallStep * 12, 48)).padStart(2, '0')}`}
-  </small>
-</div>
-
-  <small>
-    {aiCallStep === 0
-      ? '00:00'
-      : `00:${String(Math.min(aiCallStep * 12, 48)).padStart(2, '0')}`}
-  </small>
-</div>
-
-
-        <div className="ai-caller">
-
-          <div className="ai-caller-avatar">
-            H
-          </div>
-
-          <div>
-            <small>INCOMING CUSTOMER</small>
-            <strong>Homeowner</strong>
-            <span>Calling Riverside Home Services</span>
-          </div>
-
-        </div>
-
-
-        <div className="ai-wave" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-
-
-      <div className="ai-call-conversation">
-
-  {aiCallStep === 0 && (
-    <div className="ai-demo-waiting">
-      <strong>Incoming Customer Call</strong>
-      <p>
-        Answer to experience how your AI Phone Employee responds.
-      </p>
-    </div>
-  )}
-
-  {aiCallStep >= 1 && (
-    <div className="ai-transcript customer">
-      <span>CUSTOMER</span>
-      <p>“My AC stopped cooling this afternoon.”</p>
-    </div>
-  )}
-
-  {aiCallStep >= 2 && (
-    <div className="ai-transcript employee">
-      <span>RIVERSIDE AI PHONE EMPLOYEE</span>
-      <p>
-        “I can help with that. Let me get a few details
-        and check the next available service time.”
-      </p>
-    </div>
-  )}
-
-</div>
-
-   <div
-  className={`ai-call-capture ${
-    aiCallStep >= 3 ? 'ai-capture-visible' : 'ai-capture-hidden'
-  }`}
->
-
-          <div>
-            <small>NEED IDENTIFIED</small>
-            <strong>AC Repair</strong>
-          </div>
-
-          <div>
-            <small>CUSTOMER</small>
-            <strong>Details Captured</strong>
-          </div>
-
-          <div>
-            <small>NEXT STEP</small>
-            <strong>Check Availability</strong>
-          </div>
-
-        </div>
-
-
-        <div className="ai-call-status">
-<div className="ai-demo-controls">
-
-  {aiCallStep === 0 && (
-    <button
-      type="button"
-      className="ai-demo-answer"
-      onClick={startAiCallDemo}
-    >
-      <span>☎</span>
-      Answer Call
-    </button>
-  )}
-
-  {aiCallStep > 0 && aiCallStep < 4 && (
-    <span className="ai-demo-progress">
-      AI Phone Employee Demonstration in Progress...
-    </span>
-  )}
-
-  {aiCallStep === 4 && (
-    <button
-      type="button"
-      className="ai-demo-replay"
-      onClick={replayAiCallDemo}
-    >
-      ↻ Replay Demonstration
-    </button>
-  )}
-
-</div>
-          <span>
-            <i />
-            Conversation in progress
-          </span>
-
-          <strong>
-            CONNECTED TO THE CUSTOMER SYSTEM
-          </strong>
-
-        </div>
-
+    <div className="ai-call-header">
+      <div className="ai-call-live">
+        <span />
+        ACTUAL AI CONVERSATION
       </div>
+      <small>12 STONE • VOICE AI</small>
+    </div>
 
+    <div className="ai-caller">
+      <div className="ai-caller-avatar">A</div>
+      <div>
+        <small>MEET YOUR AI VOICE EMPLOYEE</small>
+        <strong>Ashley</strong>
+        <span>12 STONE AI Assistant</span>
+      </div>
+    </div>
+
+    <div className="ai-wave" aria-hidden="true">
+      {Array.from({ length: 10 }, (_, index) => (
+        <span key={index} />
+      ))}
+    </div>
+
+    <div className="ai-call-conversation">
+      <div className="ai-demo-waiting">
+        <strong>Hear Ashley in Action</strong>
+        <p>
+          Listen to a real conversation as Ashley answers
+          questions, understands a business owner's goals,
+          and responds to a request for personal assistance.
+        </p>
+      </div>
+    </div>
+
+    <div className="ai-real-audio">
+      <audio controls preload="metadata">
+        <source
+          src="/audio/ashley-voice-demo.mp3"
+          type="audio/mpeg"
+        />
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <div className="ai-call-status">
+      <span>REAL CALL RECORDING</span>
+      <strong>NOT A SIMULATED CONVERSATION</strong>
     </div>
 
   </div>
+</div>
+
+</div>
+
 {/* SMART WEBSITE CONVERSION CTA */}
 
 <div className="smart-system-cta">
