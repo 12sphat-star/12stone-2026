@@ -18,6 +18,8 @@ export async function onRequestPost({ request, env }) {
         "https://12stone-2026.pages.dev",
         "https://12stoneconsulting.com",
         "https://www.12stoneconsulting.com",
+        "https://12stoneboost.com",
+"https://www.12stoneboost.com",
       ].includes(origin)
     ) {
       return json({ error: "Origin not allowed" }, 403);
