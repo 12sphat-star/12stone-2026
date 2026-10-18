@@ -1,0 +1,215 @@
+
+/* ==========================================
+   12 STONE BOOST — PREMIUM FOOTER
+========================================== */
+
+.stone-footer {
+  position: relative;
+  background: #f8f7fc;
+  color: #211a35;
+  padding: 90px 0 28px;
+  border-top: 1px solid #e9e3f4;
+  overflow: hidden;
+}
+
+.stone-footer::before {
+  content: "";
+  position: absolute;
+  top: -180px;
+  left: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(119, 66, 232, 0.09),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.stone-footer-inner {
+  position: relative;
+  width: min(1200px, 90%);
+  margin: 0 auto;
+}
+
+.stone-footer-top {
+  display: grid;
+  grid-template-columns: 1.7fr 0.8fr 1fr 1fr;
+  gap: 45px;
+  padding-bottom: 75px;
+}
+
+.stone-footer-brand {
+  max-width: 390px;
+}
+
+.stone-footer-logo {
+  display: block;
+  width: 155px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 28px;
+}
+
+.stone-footer-brand h2 {
+  font-size: clamp(25px, 2.5vw, 36px);
+  line-height: 1.12;
+  letter-spacing: -1.3px;
+  font-weight: 850;
+  margin: 0 0 20px;
+  color: #211a35;
+}
+
+.stone-footer-brand p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #6b647b;
+  margin: 0 0 28px;
+}
+
+.stone-footer-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 22px;
+  border-radius: 10px;
+  background: #6938d3;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+  transition: transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.stone-footer-cta:hover {
+  background: #5025b4;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(105, 56, 211, 0.2);
+}
+
+.stone-footer-cta span {
+  font-size: 19px;
+}
+
+.stone-footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  min-width: 0;
+}
+
+.stone-footer-column h3 {
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 1.3px;
+  color: #5d32bf;
+  margin: 7px 0 12px;
+}
+
+.stone-footer-column a {
+  color: #60596e;
+  font-size: 14px;
+  line-height: 1.6;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.stone-footer-column a:hover {
+  color: #6938d3;
+  transform: translateX(3px);
+}
+
+.stone-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-top: 25px;
+  border-top: 1px solid #e4dfee;
+  font-size: 12px;
+  color: #81798f;
+}
+
+.stone-footer-legal {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.stone-footer-legal a {
+  color: #6b647b;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.stone-footer-legal a:hover {
+  color: #6938d3;
+}
+
+/* TABLET */
+
+@media (max-width: 1050px) {
+  .stone-footer-top {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 50px;
+  }
+
+  .stone-footer-brand {
+    max-width: 440px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 640px) {
+  .stone-footer {
+    padding: 65px 0 25px;
+  }
+
+  .stone-footer-top {
+    grid-template-columns: 1fr;
+    gap: 38px;
+    padding-bottom: 45px;
+  }
+
+  .stone-footer-brand h2 {
+    font-size: 30px;
+  }
+
+  .stone-footer-column {
+    gap: 12px;
+  }
+
+  .stone-footer-column h3 {
+    margin-bottom: 6px;
+  }
+
+  .stone-footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    line-height: 1.6;
+  }
+
+  .stone-footer-legal {
+    gap: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stone-footer a {
+    transition: none;
+  }
+
+  .stone-footer a:hover {
+    transform: none;
+  }
+}

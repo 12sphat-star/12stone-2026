@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
+import Footer from "./Footer";
 
 
 function App() {
@@ -225,6 +226,7 @@ useEffect(() => {
 
 
     return (
+        <>
     <main className="site">
 
   {/* =====================================================
@@ -2658,7 +2660,9 @@ onSubmit={async (e) => {
   </div>
 
 </section>
-    </main>
+        </main>
+    <Footer />
+    </>
   )
 }
 
