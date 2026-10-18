@@ -74,7 +74,17 @@ export async function onRequestPost({ request, env }) {
       );
     }
 
-    return json({ success: true });
+   const ghlResult = await response.json();
+
+console.log("GHL contact response:", {
+  contactId: ghlResult.contact?.id,
+  status: response.status,
+});
+
+return json({
+  success: true,
+  contactId: ghlResult.contact?.id || null,
+});
   } catch (error) {
     console.error("Discovery form error:", error);
     return json(
